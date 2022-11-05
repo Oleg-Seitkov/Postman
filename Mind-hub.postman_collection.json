@@ -1,0 +1,798 @@
+{
+	"info": {
+		"_postman_id": "3c5bb8b7-fcf4-4dba-8352-02811b2f1253",
+		"name": "Mind-hub",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20966133"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "/users",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "mhtest",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "mhuser",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://adv.mind-hub.ru/v1/users/",
+							"protocol": "http",
+							"host": [
+								"adv",
+								"mind-hub",
+								"ru"
+							],
+							"path": [
+								"v1",
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/users/id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"ResponceCheck\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.id).to.eql(25062910);\r",
+									"    pm.expect(jsonData.login).to.eql(\"nayvyy\");\r",
+									"    pm.expect(jsonData.account).to.eql(10000);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "mhtest",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "mhuser",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://adv.mind-hub.ru/v1/users/25062910/",
+							"protocol": "http",
+							"host": [
+								"adv",
+								"mind-hub",
+								"ru"
+							],
+							"path": [
+								"v1",
+								"users",
+								"25062910",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = JSON.parse (responseBody)\r",
+									"pm.collectionVariables.set(\"logins\", jsonData.login);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "mhtest",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "mhuser",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \n  \"login\": \"{{$randomFirstName}}\",\n  \"password\": \"asdfghyuio\"\n}"
+						},
+						"url": {
+							"raw": "https://adv.mind-hub.ru/v1/register/",
+							"protocol": "https",
+							"host": [
+								"adv",
+								"mind-hub",
+								"ru"
+							],
+							"path": [
+								"v1",
+								"register",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "basic"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "/Create new user session",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = JSON.parse (responseBody)\r",
+									"pm.collectionVariables.set(\"autho\", jsonData.session);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "mhtest",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "mhuser",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"login\": \"fghtt\",\n  \"password\": \"1234567q\"\n}"
+						},
+						"url": {
+							"raw": "https://adv.mind-hub.ru/v1/auth/",
+							"protocol": "https",
+							"host": [
+								"adv",
+								"mind-hub",
+								"ru"
+							],
+							"path": [
+								"v1",
+								"auth",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get current user information",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "mhtest",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "mhuser",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Auth",
+								"value": "{{autho}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://adv.mind-hub.ru/v1/me/",
+							"protocol": "https",
+							"host": [
+								"adv",
+								"mind-hub",
+								"ru"
+							],
+							"path": [
+								"v1",
+								"me",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Stops user session",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "mhtest",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "mhuser",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Auth",
+								"value": "{{autho}}"
+							}
+						],
+						"url": {
+							"raw": "https://adv.mind-hub.ru/v1/auth/?Auth={{autho}}",
+							"protocol": "https",
+							"host": [
+								"adv",
+								"mind-hub",
+								"ru"
+							],
+							"path": [
+								"v1",
+								"auth",
+								""
+							],
+							"query": [
+								{
+									"key": "Auth",
+									"value": "{{autho}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "adverts",
+			"item": [
+				{
+					"name": "Get adverts list",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "mhtest",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "mhuser",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://adv.mind-hub.ru/v1/adverts/",
+							"protocol": "http",
+							"host": [
+								"adv",
+								"mind-hub",
+								"ru"
+							],
+							"path": [
+								"v1",
+								"adverts",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create new advert",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "mhtest",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "mhuser",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "auth",
+								"value": "lPrXlhQxOvQ87h7cZ6hLR1AKvib7ha5Tu7hxOWND0-c=",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"days\": 7,\n  \"title\": \"{{$randomCity}}\",\n  \"town\": \"Moscow\",\n  \"description\": \"town\",\n  \"pay_method\": \"account\"\n}"
+						},
+						"url": {
+							"raw": "https://adv.mind-hub.ru/v1/adverts/?login=fghytrqwewww&password=1234567q",
+							"protocol": "https",
+							"host": [
+								"adv",
+								"mind-hub",
+								"ru"
+							],
+							"path": [
+								"v1",
+								"adverts",
+								""
+							],
+							"query": [
+								{
+									"key": "login",
+									"value": "fghytrqwewww"
+								},
+								{
+									"key": "password",
+									"value": "1234567q"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit advert",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "mhtest",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "mhuser",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Auth",
+								"value": "OlP_PECutJbR4Y0B-gE6VMl7a1SOtyzLjtZ6F3rncBU="
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 112233445579,\n  \"title\": \"{{sim}}\",\n  \"town\": \"Pekin\",\n  \"description\": \"city22\"\n}"
+						},
+						"url": {
+							"raw": "https://adv.mind-hub.ru/v1/adverts/?login=tfghttt&password=1234567q",
+							"protocol": "https",
+							"host": [
+								"adv",
+								"mind-hub",
+								"ru"
+							],
+							"path": [
+								"v1",
+								"adverts",
+								""
+							],
+							"query": [
+								{
+									"key": "login",
+									"value": "tfghttt"
+								},
+								{
+									"key": "password",
+									"value": "1234567q"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "mhtest",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "mhuser",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Auth",
+								"value": "OlP_PECutJbR4Y0B-gE6VMl7a1SOtyzLjtZ6F3rncBU=",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 112233445579,\r\n  \"title\": \"oy, my God\",\r\n  \"town\": \"4567\",\r\n  \"description\": \"city22\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://adv.mind-hub.ru/v1/adverts/?login=fghtt&password=1234567q",
+							"protocol": "https",
+							"host": [
+								"adv",
+								"mind-hub",
+								"ru"
+							],
+							"path": [
+								"v1",
+								"adverts",
+								""
+							],
+							"query": [
+								{
+									"key": "login",
+									"value": "fghtt"
+								},
+								{
+									"key": "password",
+									"value": "1234567q"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "basic",
+				"basic": [
+					{
+						"key": "password",
+						"value": "mhuser",
+						"type": "string"
+					},
+					{
+						"key": "username",
+						"value": "mhuser",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"",
+							"pm.collectionVariables.set(\"z\", \"pm.info.iteration:String\");",
+							"",
+							"pm.collectionVariables.set(\"q\", \"{{z}}\");"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "misc",
+			"item": [
+				{
+					"name": "Get known towns list",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "mhtest",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "mhuser",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://adv.mind-hub.ru/v1/towns/",
+							"protocol": "http",
+							"host": [
+								"adv",
+								"mind-hub",
+								"ru"
+							],
+							"path": [
+								"v1",
+								"towns",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "New Folder",
+			"item": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "mhtest",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "mhuser",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "logins",
+			"value": ""
+		},
+		{
+			"key": "autho",
+			"value": ""
+		},
+		{
+			"key": "z",
+			"value": ""
+		},
+		{
+			"key": "q",
+			"value": ""
+		}
+	]
+}
